@@ -7,10 +7,10 @@ import (
 	"strconv"
 )
 
-func main(){
+func main() {
 	f, err := os.Open("data.txt")
 	if err != nil {
-		fmt.Println("Cannot open file",err)
+		fmt.Println("Cannot open file", err)
 		return
 	}
 	defer f.Close()
@@ -23,7 +23,7 @@ func main(){
 		i++
 		val, err := strconv.Atoi(scanner.Text())
 		if err != nil {
-			fmt.Println("Cannot convert to int",err)
+			fmt.Println("Cannot convert to int", err)
 			return
 		}
 
@@ -36,5 +36,5 @@ func main(){
 		}
 		lastVal = val
 	}
-	fmt.Println("Times value was higher than last one",timesHigher)
+	fmt.Println("Times value was higher than last one", timesHigher)
 }

@@ -16,14 +16,14 @@ func main() {
 
 	y := 0
 	z := 0
-	for scanner.Scan(){
+	for scanner.Scan() {
 		line := scanner.Text()
-		raw := strings.Split(line," ")
+		raw := strings.Split(line, " ")
 
 		direction := raw[0]
 		count, _ := strconv.Atoi(raw[1])
-		
-		switch direction{
+
+		switch direction {
 		case "forward":
 			y += count
 		case "up":
@@ -31,6 +31,6 @@ func main() {
 		case "down":
 			z += count
 		}
-}
-fmt.Println("Part 1 solution:",y*z)
+	}
+	fmt.Println("Part 1 solution:", y*z)
 }

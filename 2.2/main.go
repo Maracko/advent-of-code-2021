@@ -17,14 +17,14 @@ func main() {
 	depth := 0
 	forward := 0
 	aim := 0
-	for scanner.Scan(){
+	for scanner.Scan() {
 		line := scanner.Text()
-		raw := strings.Split(line," ")
+		raw := strings.Split(line, " ")
 
 		direction := raw[0]
 		count, _ := strconv.Atoi(raw[1])
-		
-		switch direction{
+
+		switch direction {
 		case "forward":
 			forward += count
 			depth += count * aim
@@ -33,7 +33,7 @@ func main() {
 		case "down":
 			aim += count
 		}
-		
-}
-fmt.Println("Part 2 solution:",forward*depth)
+
+	}
+	fmt.Println("Part 2 solution:", forward*depth)
 }
