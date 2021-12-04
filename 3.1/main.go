@@ -16,6 +16,7 @@ func main() {
 		counter[i] = make(map[string]int,2)
 	}
 
+	data := make([]string,1000)
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan(){
 		line := scanner.Text()
@@ -25,19 +26,13 @@ func main() {
 	}
 
 	gamma := ""
+	epsilon := ""
 	for i:=0;i< len(counter);i++ {
 		if counter[i]["1"] > counter[i]["0"] {
 			gamma += "1"
-		} else {
-			gamma += "0"
-		}
-	}
-
-	epsilon := ""
-	for _,v := range gamma {
-		if string(v) == "1" {
 			epsilon += "0"
 		} else {
+			gamma += "0"
 			epsilon += "1"
 		}
 	}
