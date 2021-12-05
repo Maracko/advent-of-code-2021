@@ -99,9 +99,10 @@ func main() {
 // Sum all reamining numbers on board after removing every number that has been drawn
 func sumAllRemainingNumbers(nDrawn int, b board) int {
 	var sum int
+	numArr := numbers[:nDrawn]
 	for _, row := range b {
 		for _, num := range row {
-			if !numInArray(num, numbers[:nDrawn]) {
+			if !numInArray(num, numArr) {
 				sum += num
 			}
 		}
@@ -138,9 +139,10 @@ func isWinningLine(nDrawn int, ln line) bool {
 		return false
 	}
 
+	numArr := numbers[:nDrawn]
 	nMatched := 0
 	for _, num := range ln {
-		if numInArray(num, numbers[:nDrawn]) {
+		if numInArray(num, numArr) {
 			nMatched++
 		}
 	}
