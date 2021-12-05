@@ -65,8 +65,7 @@ func main() {
 	lastDrawnNumIdx := 0
 	for i := range numbers {
 		nDrawn := i + 1
-		for {
-			j := 0
+		for j := 0; j < len(boards); {
 			for boardIdx, board := range boards {
 				j++
 				rows, columns := getAllRowsAndColumns(board)
@@ -86,9 +85,6 @@ func main() {
 					j = 0
 					break
 				}
-			}
-			if j == len(boards) {
-				break
 			}
 
 		}
