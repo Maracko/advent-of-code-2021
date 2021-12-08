@@ -32,10 +32,6 @@ func main() {
 	addLinesToMatrix(cMat, coords, false)
 	addLinesToMatrix(cMat2, coords, true)
 
-	for _, row := range cMat2 {
-		fmt.Println(row)
-	}
-
 	fmt.Println("Part 1 solution:", getCountOfOverlappingPoints(cMat))
 	fmt.Println("Part 2 solution:", getCountOfOverlappingPoints(cMat2))
 }
@@ -65,27 +61,27 @@ func sortCoordinatesByValue(c *coordinate) {
 	}
 }
 
-// func getSortedCoordValue(coord coordinate, axis string) (low int, high int) {
-// 	switch axis {
-// 	case "x":
-// 		if coord.x1 < coord.x2 {
-// 			low = coord.x1
-// 			high = coord.x2
-// 		} else {
-// 			low = coord.x2
-// 			high = coord.x1
-// 		}
-// 	case "y":
-// 		if coord.y1 < coord.y2 {
-// 			low = coord.y1
-// 			high = coord.y2
-// 		} else {
-// 			low = coord.y2
-// 			high = coord.y1
-// 		}
-// 	}
-// 	return
-// }
+func getSortedCoordValue(coord coordinate, axis string) (low int, high int) {
+	switch axis {
+	case "x":
+		if coord.x1 < coord.x2 {
+			low = coord.x1
+			high = coord.x2
+		} else {
+			low = coord.x2
+			high = coord.x1
+		}
+	case "y":
+		if coord.y1 < coord.y2 {
+			low = coord.y1
+			high = coord.y2
+		} else {
+			low = coord.y2
+			high = coord.y1
+		}
+	}
+	return
+}
 
 func addLinesToMatrix(mat Matrix2D, coords []coordinate, addDiagonal bool) {
 	for _, c := range coords {
@@ -106,50 +102,23 @@ func addLinesToMatrix(mat Matrix2D, coords []coordinate, addDiagonal bool) {
 				}
 			}
 		} else if addDiagonal {
-			i := 0
-			j := 0
-			if c.x1 < c.x2 {
-				for col := c.x1; col <= c.x2; col++ {
-					i++
-					if c.y1 < c.y2 {
-						for row := c.y1; row <= c.y2; row++ {
-							j++
-							if i == j {
-								mat[row][col]++
-							}
-						}
+			lowX, highX := getSortedCoordValue(c, "x")
+			lowY, highY := getSortedCoordValue(c, "y")
 
-					} else {
-						for row := c.y1; row >= c.y2; row-- {
-							j++
-							if i == j {
-								mat[row][col]++
-							}
-						}
+			deltaX := highX - lowX
+			deltaY := highY - lowY
+
+			if deltaX == deltaY {
+				for i := 0; i <= deltaX; i++ {
+					j := i
+					if c.y1 > c.y2 {
+						j = -i
 					}
-					j = 0
-
-				}
-			} else {
-				for col := c.x1; col >= c.x2; col-- {
-					i++
-					if c.y1 < c.y2 {
-						for row := c.y1; row <= c.y2; row++ {
-							j++
-							if i == j {
-								mat[row][col]++
-							}
-						}
-
-					} else {
-						for row := c.y1; row >= c.y2; row-- {
-							j++
-							if i == j {
-								mat[row][col]++
-							}
-						}
+					k := i
+					if c.x1 > c.x2 {
+						k = -i
 					}
-					j = 0
+					mat[c.y1+j][c.x1+k]++
 				}
 			}
 		}
