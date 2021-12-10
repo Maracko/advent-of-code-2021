@@ -1,25 +1,62 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 	"strconv"
+
+	"github.com/maracko/advent-of-code-2021/helpers"
 )
 
 func main() {
 	f, _ := os.Open("data.txt")
 	defer f.Close()
 
-	scanner := bufio.NewScanner(f)
-	vals := make([]string, 0, 1000)
-	for scanner.Scan() {
-		vals = append(vals, scanner.Text())
+	data, _ := helpers.ReadFileToSliceOfStrings("data.txt")
+
+	fmt.Println("Part 1 solution:", solvePart1(data))
+	fmt.Println("Part 2 solution:", solvePart2(data))
+}
+
+func createCounter(len int) map[int]map[string]int {
+	counter := make(map[int]map[string]int, len)
+	for i := 0; i < len; i++ {
+		counter[i] = make(map[string]int, 2)
+	}
+	return counter
+}
+
+func solvePart1(data []string) int {
+	counter := createCounter(len(data[0]))
+
+	for _, line := range data {
+		for i, char := range line {
+			counter[i][string(char)] += 1
+		}
 	}
 
-	oxyVals := vals
-	co2Vals := vals
-	for pos := 0; pos < len(vals[0]); pos++ {
+	gamma := ""
+	epsilon := ""
+	for i := 0; i < len(counter); i++ {
+		if counter[i]["1"] > counter[i]["0"] {
+			gamma += "1"
+			epsilon += "0"
+		} else {
+			gamma += "0"
+			epsilon += "1"
+		}
+	}
+
+	decGamma, _ := strconv.ParseInt(gamma, 2, 64)
+	decEpsilon, _ := strconv.ParseInt(epsilon, 2, 64)
+
+	return int(decGamma) * int(decEpsilon)
+}
+
+func solvePart2(data []string) int {
+	oxyVals := data
+	co2Vals := data
+	for pos := 0; pos < len(data[0]); pos++ {
 		counterOxy := make(map[string]int, 2)
 		for _, line := range oxyVals {
 			counterOxy[string(line[pos])] += 1
@@ -72,5 +109,5 @@ func main() {
 	decOxy, _ := strconv.ParseInt(oxyVals[0], 2, 64)
 	decCO2, _ := strconv.ParseInt(co2Vals[0], 2, 64)
 
-	fmt.Println("Part 2 solution:", decOxy*decCO2)
+	return int(decOxy) * int(decCO2)
 }
