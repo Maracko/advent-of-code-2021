@@ -9,10 +9,7 @@ import (
 )
 
 type coordinate struct {
-	x1 int
-	y1 int
-	x2 int
-	y2 int
+	x1, x2, y1, y2 int
 }
 
 type Matrix2D [][]int
@@ -125,9 +122,9 @@ func addLinesToMatrix(mat Matrix2D, coords []coordinate, addDiagonal bool) {
 	}
 }
 
-func getCountOfOverlappingPoints(cMat Matrix2D) int {
+func getCountOfOverlappingPoints(mat Matrix2D) int {
 	count := 0
-	for _, row := range cMat {
+	for _, row := range mat {
 		for _, point := range row {
 			if point > 1 {
 				count++
