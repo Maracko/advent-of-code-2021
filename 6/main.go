@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/maracko/advent-of-code-2021/helpers"
+	"github.com/maracko/advent-of-code-2021/helpers/file"
+	"github.com/maracko/advent-of-code-2021/helpers/slice"
 )
 
 type lanternFish struct {
@@ -20,8 +21,8 @@ func main() {
 }
 
 func simulate(nDays int) int {
-	data, _ := helpers.ReadFileToSliceOfStrings("data.txt")
-	vals := helpers.ReadStringToSliceOfInts(data[0], ",")
+	data, _ := file.ReadFileToSliceOfStrings("data.txt")
+	vals := slice.ReadStringToSliceOfInts(data[0], ",")
 	fishes := [9]int{}
 	for _, val := range vals {
 		fishes[val]++
@@ -36,5 +37,5 @@ func simulate(nDays int) int {
 		fishes[newFishTimer] = nFishAtZero
 
 	}
-	return helpers.SumSliceOfInts(fishes[:])
+	return slice.SumSliceOfInts(fishes[:])
 }

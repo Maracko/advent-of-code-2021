@@ -5,7 +5,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/maracko/advent-of-code-2021/helpers"
+	"github.com/maracko/advent-of-code-2021/helpers/file"
 )
 
 type coordinate struct {
@@ -15,7 +15,7 @@ type coordinate struct {
 type Matrix2D [][]int
 
 func main() {
-	data, _ := helpers.ReadFileToSliceOfStrings("data.txt")
+	data, _ := file.ReadFileToSliceOfStrings("data.txt")
 
 	var coords []coordinate
 	for _, val := range data {

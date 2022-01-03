@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/maracko/advent-of-code-2021/helpers"
+	"github.com/maracko/advent-of-code-2021/helpers/file"
 )
 
 type line [5]int
@@ -14,7 +14,7 @@ type board [5]line
 var numbers []int
 
 func main() {
-	data, _ := helpers.ReadFileToSliceOfStrings("data.txt")
+	data, _ := file.ReadFileToSliceOfStrings("data.txt")
 	numbers = getAllDrawnNumbers(data[0])
 
 	fmt.Println("Part 1 solution:", solvePart1(data))

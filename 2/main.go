@@ -5,11 +5,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/maracko/advent-of-code-2021/helpers"
+	"github.com/maracko/advent-of-code-2021/helpers/file"
 )
 
 func main() {
-	vals, _ := helpers.ReadFileToSliceOfStrings("data.txt")
+	vals, _ := file.ReadFileToSliceOfStrings("data.txt")
 
 	depth, forward := solvePart1(vals)
 	fmt.Println("Part 1 solution:", depth*forward)

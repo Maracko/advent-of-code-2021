@@ -2,17 +2,14 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"strconv"
 
-	"github.com/maracko/advent-of-code-2021/helpers"
+	"github.com/maracko/advent-of-code-2021/helpers/file"
 )
 
 func main() {
-	f, _ := os.Open("data.txt")
-	defer f.Close()
 
-	data, _ := helpers.ReadFileToSliceOfStrings("data.txt")
+	data, _ := file.ReadFileToSliceOfStrings("data.txt")
 
 	fmt.Println("Part 1 solution:", solvePart1(data))
 	fmt.Println("Part 2 solution:", solvePart2(data))
