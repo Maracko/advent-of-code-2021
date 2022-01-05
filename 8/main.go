@@ -153,7 +153,6 @@ func solvePart2(data []display) int {
 
 				if !maps.StringInMap(valsMap, val) {
 					valsMap[3] = val
-					fmt.Println(valsMap[3])
 					break Value3Loop
 				}
 			}
