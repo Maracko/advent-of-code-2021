@@ -45,3 +45,27 @@ func IntInSlice(slice []int, num int) bool {
 	i := sort.Search(len(cpy), func(i int) bool { return cpy[i] >= num })
 	return i < len(cpy) && cpy[i] == num
 }
+
+type sortRuneString []rune
+
+func (s sortRuneString) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s sortRuneString) Less(i, j int) bool {
+	return s[i] < s[j]
+}
+
+func (s sortRuneString) Len() int {
+	return len(s)
+}
+
+func SortAllStringsInSlice(s []string) []string {
+	var res []string
+	for _, str := range s {
+		runes := []rune(str)
+		sort.Sort(sortRuneString(runes))
+		res = append(res, string(runes))
+	}
+	return res
+}
