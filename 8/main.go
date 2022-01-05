@@ -15,19 +15,19 @@ type display struct {
 	output []string
 }
 
-//Key: digit, Val: number of segments needed to show it
-var digitsMap = map[int]int{
-	0: 6,
-	1: 2, //unique len
-	2: 5,
-	3: 5,
-	4: 4, //unique len
-	5: 5,
-	6: 6,
-	7: 3, //unique len
-	8: 7, //unique len
-	9: 6,
-}
+// //Key: digit, Val: number of segments needed to show it
+// var digitsMap = map[int]int{
+// 	0: 6,
+// 	1: 2, //unique len
+// 	2: 5,
+// 	3: 5,
+// 	4: 4, //unique len
+// 	5: 5,
+// 	6: 6,
+// 	7: 3, //unique len
+// 	8: 7, //unique len
+// 	9: 6,
+// }
 
 //Key: Len , Val:  Digit
 var uniqueDigitsMap = map[int]int{
@@ -58,8 +58,13 @@ func getSliceOfDisplays(data []string) []display {
 	var res []display
 	for _, val := range data {
 		splitVal := strings.Split(val, " ")
+
 		digits := append([]string(nil), splitVal[:10]...)
+		digits = slice.SortAllStringsInSlice(digits)
+
 		output := append([]string(nil), splitVal[11:]...)
+		output = slice.SortAllStringsInSlice(output)
+
 		res = append(res, display{digits, output})
 	}
 	return res
@@ -144,9 +149,12 @@ func solvePart2(data []display) int {
 					if !strings.ContainsRune(valsMap[9], char) {
 						continue Value3Loop
 					}
-					if !maps.StringInMap(valsMap, val) {
-						valsMap[3] = val
-					}
+				}
+
+				if !maps.StringInMap(valsMap, val) {
+					valsMap[3] = val
+					fmt.Println(valsMap[3])
+					break Value3Loop
 				}
 			}
 		}
@@ -159,19 +167,17 @@ func solvePart2(data []display) int {
 		}
 
 		//Calculate the number inside output and add it to total
-		// fmt.Println("FULL OUTPUT:", disp.output)
 		outString := ""
 		for _, output := range disp.output {
-			// fmt.Println("CURRENT Output:", output)
 			for number, digit := range valsMap {
 				if output == digit {
 					outString += fmt.Sprint(number)
 					break
 				}
 			}
-			num, _ := strconv.Atoi(outString)
-			res += num
 		}
+		num, _ := strconv.Atoi(outString)
+		res += num
 	}
 	return res
 }
