@@ -46,6 +46,19 @@ func IntInSlice(slice []int, num int) bool {
 	return i < len(cpy) && cpy[i] == num
 }
 
+func LowerNumberInSlice(s []int, n int) (exists bool, idx int) {
+	for i := 0; i < len(s); i++ {
+		num := s[i]
+		if num < n {
+			exists = true
+			idx = i
+			return
+
+		}
+	}
+	return
+}
+
 type sortRuneString []rune
 
 func (s sortRuneString) Swap(i, j int) {
