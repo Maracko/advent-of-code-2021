@@ -140,17 +140,7 @@ numLoop:
 		nDrawn := i + 1
 		for _, board := range boards {
 			rows, columns := getAllRowsAndColumns(board)
-			boardWon := false
-
-			if won := lineWon(nDrawn, rows); won {
-				boardWon = true
-
-			}
-			if won := lineWon(nDrawn, columns); won {
-				boardWon = true
-			}
-
-			if boardWon {
+			if boardWon := lineWon(nDrawn, rows) || lineWon(nDrawn, columns); boardWon {
 				// fmt.Printf("Board %d is first winner after %d numbers drawn. Last drawn number: %d\n", boardIdx+1, nDrawn, num)
 				numbersDrawn = nDrawn
 				number = num
@@ -206,22 +196,14 @@ func solvePart2(data []string) int {
 			for boardIdx, board := range boards {
 				j++
 				rows, columns := getAllRowsAndColumns(board)
-				winnerBoard := false
-
-				if won := lineWon(nDrawn, rows); won {
-					winnerBoard = true
-				}
-				if won := lineWon(nDrawn, columns); won {
-					winnerBoard = true
-				}
-
-				if winnerBoard {
+				if winnerBoard := lineWon(nDrawn, rows) || lineWon(nDrawn, columns); winnerBoard {
 					lastWinningBoard = board
 					lastDrawnNumIdx = i
 					boards = append(boards[:boardIdx], boards[boardIdx+1:]...)
 					j = 0
 					break
 				}
+
 			}
 
 		}
