@@ -1,5 +1,15 @@
 package strings
 
+func CountOfRunesInString(s string, r rune) int {
+	res := 0
+	for _, char := range s {
+		if char == r {
+			res++
+		}
+	}
+	return res
+}
+
 func StringsContainSameCharsAndLen(a, b string) bool {
 	if len(a) != len(b) {
 		return false

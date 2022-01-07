@@ -46,7 +46,7 @@ func IntInSlice(slice []int, num int) bool {
 	return i < len(cpy) && cpy[i] == num
 }
 
-func LowerNumberInSlice(s []int, n int) (exists bool, idx int) {
+func LowerNumberExistsInSlice(s []int, n int) (exists bool, idx int) {
 	for i := 0; i < len(s); i++ {
 		num := s[i]
 		if num < n {
@@ -57,6 +57,15 @@ func LowerNumberInSlice(s []int, n int) (exists bool, idx int) {
 		}
 	}
 	return
+}
+
+func RuneInSlice(s []rune, i rune) (exists bool, idx int) {
+	for idx, val := range s {
+		if val == i {
+			return true, idx
+		}
+	}
+	return false, -1
 }
 
 type sortRuneString []rune
