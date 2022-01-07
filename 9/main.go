@@ -112,17 +112,17 @@ func createVisitedSlice(mtx [][]int) [][]bool {
 }
 
 func solvePart2(mtx [][]int, pts []point) int {
-	largestBasinSizes := []int{}
+	sizes := []int{}
 
 	for _, point := range pts {
 		size := point.getBasinSize(mtx)
-		largestBasinSizes = append(largestBasinSizes, size)
+		sizes = append(sizes, size)
 	}
 
-	sort.Ints(largestBasinSizes)
-	highest := largestBasinSizes[len(largestBasinSizes)-3:]
+	sort.Ints(sizes)
+	largest3 := sizes[len(sizes)-3:]
 	res := 1
-	for _, num := range highest {
+	for _, num := range largest3 {
 		res *= num
 	}
 	return res
